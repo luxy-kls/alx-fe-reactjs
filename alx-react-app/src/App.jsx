@@ -13,7 +13,7 @@ function App() {
       <Header />
       <MainContent />
       <UserProfile 
-      name="Keyman Luxy Sackey" age="19" bio="Loves coding"
+      name="Alice" age="25" bio="Loves hiking and photography"
      />
 
        <Footer />
