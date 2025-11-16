@@ -6,28 +6,26 @@ const AddRecipeForm = () => {
   const addRecipe = useRecipeStore((state) => state.addRecipe);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    // Validate inputs
     if (title.trim() && description.trim()) {
-      addRecipe({
-        id: Date.now(),
-        title: title.trim(),
-        description: description.trim()
+      addRecipe({ 
+        id: Date.now(), 
+        title: title.trim(), 
+        description: description.trim() 
       });
       
-      // Clear form fields
       setTitle('');
       setDescription('');
     }
   };
-  
+
   return (
     <div style={{ marginBottom: '20px' }}>
       <h2>Add New Recipe</h2>
-      <div>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={title}
@@ -60,7 +58,7 @@ const AddRecipeForm = () => {
           }}
         />
         <button 
-          onClick={handleSubmit}
+          type="submit"
           style={{
             padding: '10px 20px',
             fontSize: '16px',
@@ -73,7 +71,7 @@ const AddRecipeForm = () => {
         >
           Add Recipe
         </button>
-      </div>
+      </form>
     </div>
   );
 };
