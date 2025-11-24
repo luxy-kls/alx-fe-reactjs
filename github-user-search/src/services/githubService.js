@@ -7,7 +7,7 @@ const fetchFullUser = async (username) => {
 };
 
 // Advanced Search
-export const advancedUserSearch = async (username, location, minRepos, page) => {
+export const fetchUserData = async (username, location, minRepos, page) => {
   let query = "";
 
   if (username) query += `${username} in:login `;
