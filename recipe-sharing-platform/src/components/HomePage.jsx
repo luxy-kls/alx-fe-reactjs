@@ -11,6 +11,12 @@ const HomePage = () => {
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold text-center mb-8">Recipe Sharing Platform</h1>
+      <Link
+  to="/add-recipe"
+  className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 mb-6"
+>
+  Add New Recipe
+</Link>
 
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {recipes.map((recipe) => (
