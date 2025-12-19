@@ -5,58 +5,58 @@ const RegistrationForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [errors, setErrors] = useState("");
   
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (!username || !email || !password) {
-      setError("All fields are required");
-      setSuccess("");
+   
+    if (!username) {
+      setErrors("Username is required");
       return;
     }
     
-    setError("");
-    
-    try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, email, password }),
-        }
-      );
-      
-      if (!response.ok) {
-        throw new Error("Registration failed");
-      }
-      
-      setSuccess("User registered successfully!");
-      setUsername("");
-      setEmail("");
-      setPassword("");
-    } catch (err) {
-      setError(err.message);
+    if (!email) {
+      setErrors("Email is required");
+      return;
     }
+    
+    if (!password) {
+      setErrors("Password is required");
+      return;
+    }
+    
+    setErrors("");
+    
+    // Mock API simulation
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      })
+      .then((response) => response.json())
+      .then(() => {
+        alert("User registered successfully");
+        setUsername("");
+        setEmail("");
+        setPassword("");
+      });
   };
   
   return (
     <div>
       <h2>Register (Controlled Components)</h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
+      {errors && <p style={{ color: "red" }}>{errors}</p>}
 
       <form onSubmit={handleSubmit}>
         <div>
           <label>Username</label><br />
           <input
             type="text"
-            value={username} 
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -65,7 +65,7 @@ const RegistrationForm = () => {
           <label>Email</label><br />
           <input
             type="email"
-            value={email}       
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
