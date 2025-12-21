@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query'
-
+import { useQuery } from '@tanstack/react-query'
 const fetchPosts = async () => {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts')
 
