@@ -1,5 +1,5 @@
-import { useQuery } from 'react-query'
 import { useQuery } from '@tanstack/react-query'
+
 const fetchPosts = async () => {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts')
 
@@ -18,9 +18,13 @@ function PostsComponent() {
     error,
     refetch,
     isFetching
-  } = useQuery('posts', fetchPosts, {
-    staleTime: 5000, // data stays fresh for 5 seconds
-    cacheTime: 10000 // cache stays for 10 seconds after unmount
+  } = useQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+    cacheTime: 1000 * 60 * 5,       // 5 minutes cache
+    staleTime: 1000 * 30,           // 30 seconds fresh
+    refetchOnWindowFocus: false,
+    keepPreviousData: true
   })
 
   if (isLoading) {
@@ -39,7 +43,7 @@ function PostsComponent() {
         Refetch Posts
       </button>
 
-      {isFetching && <p>Updating...</p>}
+      {isFetching && <p>Updating posts...</p>}
 
       <ul>
         {posts.slice(0, 10).map(post => (
@@ -53,4 +57,4 @@ function PostsComponent() {
   )
 }
 
-export default PostsComponent;
+export default PostsComponent
