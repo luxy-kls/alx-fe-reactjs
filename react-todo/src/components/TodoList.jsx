@@ -5,34 +5,34 @@ const TodoList = () => {
     { id: 1, text: 'Learn React', completed: false },
     { id: 2, text: 'Write Tests', completed: false },
   ]);
-  
+
   const [text, setText] = useState('');
-  
+
   const addTodo = (e) => {
     e.preventDefault();
     if (!text.trim()) return;
-    
+
     setTodos([
       ...todos,
       { id: Date.now(), text, completed: false },
     ]);
     setText('');
   };
-  
+
   const toggleTodo = (id) => {
     setTodos(
       todos.map(todo =>
-        todo.id === id ?
-        { ...todo, completed: !todo.completed } :
-        todo
+        todo.id === id
+          ? { ...todo, completed: !todo.completed }
+          : todo
       )
     );
   };
-  
+
   const deleteTodo = (id) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
-  
+
   return (
     <div>
       <h1>Todo List</h1>
