@@ -56,7 +56,7 @@ const TodoList = () => {
             }}
           >
             {todo.text}
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            
           </li>
         ))}
       </ul>
